@@ -1,6 +1,7 @@
 import bcrypt from "bcrypt";
 import Users from "../model/userModel.js";
 import jwt from "jsonwebtoken"
+import { HostId } from "../utils/hostId.js";
 
 export const register = async (req, res) => {
   try {
@@ -12,6 +13,7 @@ export const register = async (req, res) => {
       username,
       password: hashPass,
       email,
+      hostId:HostId()
     });
 
     
@@ -44,7 +46,7 @@ export const login = async(req,res) => {
       
       const token = jwt.sign({id:getUser._id},process.env.SECRET);
 
-      const userData = {id:getUser._id, email:getUser.email, username:getUser.username};
+      const userData = {id:getUser._id, email:getUser.email, username:getUser.username,hostId:getUser.hostId};
 
       return res.status(200).json({status:200, sucess:true, message:`Login sucessful!`, userData, token })
 

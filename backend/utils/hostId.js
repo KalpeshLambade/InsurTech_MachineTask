@@ -1,6 +1,6 @@
-export const randId = ()=> {
+export const HostId = ()=> {
     const randomData = "0123456789";
-    const token = "";
+    let token = "";
 
     for(let i=0; i<10; i++){
         const randomIndex = Math.floor(Math.random()*randomData.length);
@@ -16,3 +16,4 @@ export const randId = ()=> {
     return token;
 
 }
+

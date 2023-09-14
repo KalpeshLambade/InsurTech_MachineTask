@@ -13,8 +13,9 @@ const user =new Schema({
             type:String,
             required:true
         },
-        host:{
-            type:String
+        hostId:{
+            type:String,
+            required:true
         }
 });
 

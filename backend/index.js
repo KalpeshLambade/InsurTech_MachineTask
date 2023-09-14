@@ -4,6 +4,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 import router from "./routes/userRoutes.js";
+import auidtRouter from "./routes/auidtRoutes.js";
 
 const app = express();
 
@@ -14,7 +15,8 @@ app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use("/api/v1",router)
+app.use("/api/v1",router);
+app.use("/api/v1",auidtRouter);
 
 mongoose
   .connect(process.env.MONGODB_URL)
