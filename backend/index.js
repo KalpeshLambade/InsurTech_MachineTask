@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 import mongoose from "mongoose";
 import router from "./routes/userRoutes.js";
 import auidtRouter from "./routes/auidtRoutes.js";
+import hospitalRouter from "./routes/hospitalRoutes.js";
 
 const app = express();
 
@@ -17,6 +18,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use("/api/v1",router);
 app.use("/api/v1",auidtRouter);
+app.use("/api/v1",hospitalRouter);
 
 mongoose
   .connect(process.env.MONGODB_URL)

@@ -12,10 +12,6 @@ const user =new Schema({
         email:{
             type:String,
             required:true
-        },
-        hostId:{
-            type:String,
-            required:true
         }
 });
 

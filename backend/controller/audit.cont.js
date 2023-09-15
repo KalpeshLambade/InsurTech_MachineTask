@@ -1,38 +1,23 @@
 import AuditSchema from "../model/auditModel.js";
-import Users from "../model/userModel.js"
-import OldAuditSchema from "../model/oldAuditModel.js"
 
 
 export const addTask = async(req,res) =>{
     try {
 
-        const {hostId,providerName,action,remark} = req.body;
-
-        const isUser = await Users.findOne({hostId});
-
-        if(!isUser) return res.status(400) .json({status: 400,sucess: false, message: `New task added sucessfully`});
-        
+        const {HOS,providerName,action,remark} = req.body;
+ 
         const maxTask = await AuditSchema.findOne({}).sort({ taskId: -1 });
         const newTaskId = maxTask ? maxTask.taskId + 1 : 1;
 
         const newTask = new AuditSchema({
             taskId : newTaskId,
-            hostId,
-            providerName,
-            action,
-            remark
-        });
-
-        const oldTask = new OldAuditSchema({
-            taskId : newTaskId,
-            hostId,
+            HOS,
             providerName,
             action,
             remark
         });
 
         await newTask.save();
-        await oldTask.save();
 
         return res.status(201) .json({status: 200,sucess: true, message: `New task added sucessfully`});
 
@@ -57,9 +42,9 @@ export const getTask = async(req,res) => {
 export const updateTask = async(req,res) => {
     try {
         
-        const {taskId,hostId,providerName,action,remark} = req.body;
+        const {taskId,HOS,providerName,action,remark} = req.body;
 
-        const isTask = await AuditSchema.findOneAndUpdate({taskId},{hostId,providerName,action,remark}).exec();
+        const isTask = await AuditSchema.findOneAndUpdate({taskId},{HOS,providerName,action,remark}).exec();
         
         if(!isTask) return  res.status(400) .json({status: 400,sucess: false, message: `No Task Found`});
 
@@ -67,7 +52,7 @@ export const updateTask = async(req,res) => {
 
 
     } catch (error) {
-        return res.status(500) .json({status: 500,sucess: false, message: `Internal server error :${error}`,});
+        return res.status(500) .json({status: 500,sucess: false, message: `Internal server error :${error} KO`,});
     }
 }
 
@@ -86,10 +71,10 @@ export const deletTask = async(req,res) => {
     }
 }
 
-export const getOldTask = async(req,res) => {
+export const getBackup = async(req,res) => {
     try {
-        
-        const getData = await OldAuditSchema.find().exec();
+
+        const getData = await Backup.find().exec();
 
         return res.status(200).json({status:200, sucess:true, getData});
 
@@ -97,3 +82,4 @@ export const getOldTask = async(req,res) => {
         return res.status(500) .json({status: 500,sucess: false, message: `Internal server error :${error}`,});
     }
 }
+

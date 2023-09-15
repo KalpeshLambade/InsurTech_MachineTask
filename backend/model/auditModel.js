@@ -8,7 +8,7 @@ const auditSchema = new Schema(
       unique: true,
       default: 1,
     },
-    hostId: {
+    HOS: {
       type: String,
       required: true,
     },

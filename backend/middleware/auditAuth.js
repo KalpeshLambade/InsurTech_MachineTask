@@ -1,10 +1,10 @@
-
+import HospitalModels from "../model/hospitalModel.js"
 import AuditSchema from "../model/auditModel.js";
-import OldAuditSchema from "../model/oldAuditModel.js"
+
 
 export const checkAddTask = async (req, res, next) => {
   try {
-    const { providerName, action, remark } = req.body;
+    const {providerName,HOS, action, remark } = req.body;
 
     if (!providerName)
       return res
@@ -14,6 +14,14 @@ export const checkAddTask = async (req, res, next) => {
           sucess: false,
           message: `ProviderName is required`,
         });
+        if (!HOS)
+        return res
+          .status(400)
+          .json({
+            status: 400,
+            sucess: false,
+            message: `HOS ID is required`,
+          });
     if (!action)
       return res
         .status(400)
@@ -22,6 +30,11 @@ export const checkAddTask = async (req, res, next) => {
       return res
         .status(400)
         .json({ status: 400, sucess: false, message: `Remark is required` });
+
+
+    const isHospital = await HospitalModels.findOne({HOS}).exec();
+
+    if(!isHospital) return res.status(400).json({ status: 400, sucess: false, message: `Hospital Not Found` });
 
     next();
   } catch (error) {
@@ -37,7 +50,7 @@ export const checkAddTask = async (req, res, next) => {
 
 export const checkUpdateTask = async (req, res, next) => {
   try {
-    const { taskId,providerName, action, remark } = req.body;
+    const { taskId,HOS,providerName, action, remark } = req.body;
 
     if (!taskId)
       return res
@@ -47,6 +60,15 @@ export const checkUpdateTask = async (req, res, next) => {
           sucess: false,
           message: `ProviderName is required`,
         });
+
+    if (!HOS)
+        return res
+          .status(400)
+          .json({
+            status: 400,
+            sucess: false,
+            message: `HOS ID is required`,
+          });    
 
     if (!providerName)
       return res
@@ -65,21 +87,10 @@ export const checkUpdateTask = async (req, res, next) => {
         .status(400)
         .json({ status: 400, sucess: false, message: `Remark is required` });
 
-        const oldTask = await AuditSchema.findOne({taskId}).exec();
+        const isHospital = await AuditSchema.findOne({HOS}).exec();
 
-        if(!oldTask)  return res
-        .status(400)
-        .json({ status: 400, sucess: false, message: `Task Not Found` });
-
-        const oldData = new OldAuditSchema({
-            taskId:oldTask.taskId,
-            hostId:oldTask.hostId,
-            providerName:oldTask.providerName,
-            action:oldTask.action,
-            remark:oldTask.remark
-        })
-
-        await oldData.save();
+      if(!isHospital) return res.status(400).json({ status: 400, sucess: false, message: `Hospital Not Found` });
+      if(!isHospital.taskId) return res.status(400).json({ status: 400, sucess: false, message: `Task Not Found` }); 
 
     next();
 
