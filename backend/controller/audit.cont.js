@@ -1,4 +1,5 @@
 import AuditSchema from "../model/auditModel.js";
+import { genTaskId } from "../utils/taskId.js";
 
 
 export const addTask = async(req,res) =>{
@@ -6,11 +7,11 @@ export const addTask = async(req,res) =>{
 
         const {HOS,providerName,action,remark} = req.body;
  
-        const maxTask = await AuditSchema.findOne({}).sort({ taskId: -1 });
-        const newTaskId = maxTask ? maxTask.taskId + 1 : 1;
+        // const maxTask = await AuditSchema.findOne({}).sort({ taskId: -1 });
+        // const newTaskId = maxTask ? maxTask.taskId + 1 : 1;
 
         const newTask = new AuditSchema({
-            taskId : newTaskId,
+            taskId : genTaskId(),
             HOS,
             providerName,
             action,

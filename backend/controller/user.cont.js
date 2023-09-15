@@ -1,7 +1,6 @@
 import bcrypt from "bcrypt";
 import Users from "../model/userModel.js";
 import jwt from "jsonwebtoken"
-import { HostId } from "../utils/hostId.js";
 
 export const register = async (req, res) => {
   try {
@@ -13,7 +12,6 @@ export const register = async (req, res) => {
       username,
       password: hashPass,
       email,
-      hostId:HostId()
     });
 
     
