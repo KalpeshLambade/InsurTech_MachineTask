@@ -4,6 +4,7 @@ import Sidebar from "../sidebar/Siderbar";
 const NavbarMain = () => {
   const [browserWidth, setBrowserWidth] = useState();
   const [isSidebar, setIsSidebar] = useState(false);
+  
 
   useEffect(() => {
     setBrowserWidth(window.innerWidth || document.documentElement.clientWidth);
@@ -36,7 +37,7 @@ const NavbarMain = () => {
         </div>
       </nav>
 
-      {browserWidth >700 ?<Sidebar/> : isSidebar && <Sidebar/>}
+      {browserWidth <700 && (isSidebar && <Sidebar/>)}
     </>
   );
 };

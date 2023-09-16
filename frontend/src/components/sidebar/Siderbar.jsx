@@ -20,7 +20,7 @@ import {
    
   const Sidebar =()=> {
     return (
-      <Card className="h-[calc(100vh-2rem)] w-full md:max-w-[15rem] lg:max-w-[18rem] p-4 shadow-xl shadow-blue-gray-900/5 fixed top-16 md:top-20 border border-gray-400">
+      <Card className="md:h-full w-full shadow-sm shadow-blue-gray-900/5 border fixed md:absolute top-16 md:top-0 z-10 md:z-0">
         <List>
 
           {/* Dashboard */}

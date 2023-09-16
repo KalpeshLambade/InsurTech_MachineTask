@@ -32,7 +32,7 @@ export const getTask = async(req,res) => {
 
         const allTask = await AuditSchema.find();
 
-        return res.status(400) .json({status: 400,sucess: true, message: `All task displyed`, allTask});
+        return res.status(200) .json({status: 200,sucess: true, message: `All task displyed`, allTask});
 
 
     } catch (error) {
