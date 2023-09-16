@@ -6,19 +6,21 @@ import {
   } from "@material-tailwind/react";
   import {
     PresentationChartBarIcon,
-    ShoppingBagIcon,
     UserCircleIcon,
-    Cog6ToothIcon,
-    InboxIcon,
-    PowerIcon,
     ClipboardDocumentListIcon,
     RssIcon,
-    NoSymbolIcon
+    NoSymbolIcon,
+    DocumentTextIcon,
+    UserGroupIcon,
+    QuestionMarkCircleIcon,
+    MagnifyingGlassCircleIcon,
+    WrenchScrewdriverIcon,
+    DocumentMagnifyingGlassIcon
   } from "@heroicons/react/24/solid";
    
   const Sidebar =()=> {
     return (
-      <Card className="h-[calc(70vh-2rem)] md:h-[calc(100vh-2rem)] w-full md:max-w-[15rem] lg:max-w-[18rem] p-4 shadow-xl shadow-blue-gray-900/5 fixed top-20 border border-red-800">
+      <Card className="h-[calc(100vh-2rem)] w-full md:max-w-[15rem] lg:max-w-[18rem] p-4 shadow-xl shadow-blue-gray-900/5 fixed top-16 md:top-20 border border-gray-400">
         <List>
 
           {/* Dashboard */}
@@ -48,14 +50,14 @@ import {
            {/*Non-Network Provider */}
            <ListItem>
             <ListItemPrefix>
-              <ShoppingBagIcon className="h-5 w-5" />
+              <NoSymbolIcon className="h-5 w-5" />
             </ListItemPrefix>
             Non-Network Provider
           </ListItem>
 
           <ListItem>
             <ListItemPrefix>
-              <InboxIcon className="h-5 w-5" />
+              <DocumentTextIcon className="h-5 w-5" />
             </ListItemPrefix>
             My Documents
           </ListItem>
@@ -69,28 +71,35 @@ import {
 
           <ListItem>
             <ListItemPrefix>
-              <Cog6ToothIcon className="h-5 w-5" />
+              <UserGroupIcon className="h-5 w-5" />
             </ListItemPrefix>
             User Mangement
           </ListItem>
 
           <ListItem>
             <ListItemPrefix>
-              <PowerIcon className="h-5 w-5" />
+              <DocumentMagnifyingGlassIcon className="h-5 w-5" />
+            </ListItemPrefix>
+            Audit Trial
+          </ListItem>
+
+          <ListItem>
+            <ListItemPrefix>
+              <QuestionMarkCircleIcon className="h-5 w-5" />
             </ListItemPrefix>
             Support
           </ListItem>
 
           <ListItem>
             <ListItemPrefix>
-              <PowerIcon className="h-5 w-5" />
+              <MagnifyingGlassCircleIcon className="h-5 w-5" />
             </ListItemPrefix>
             Search
           </ListItem>
 
           <ListItem>
             <ListItemPrefix>
-              <PowerIcon className="h-5 w-5" />
+              <WrenchScrewdriverIcon className="h-5 w-5" />
             </ListItemPrefix>
             Master Configurator
           </ListItem>
