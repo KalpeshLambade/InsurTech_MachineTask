@@ -60,9 +60,9 @@ export const updateTask = async(req,res) => {
 export const deletTask = async(req,res) => {
     try {
 
-        const {taskId} = req.body;
+        const id = req.params.id;
 
-        await AuditSchema.findOneAndDelete(taskId);
+        await AuditSchema.findOneAndDelete(id);
 
         return res.status(200).json({status:200, sucess:true, message:`Task Delected sucessfully`});    
 

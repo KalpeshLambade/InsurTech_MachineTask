@@ -107,13 +107,12 @@ export const checkUpdateTask = async (req, res, next) => {
 
 export const checkDelectTask = async(req,res,next) => {
   try {
+  
+      const id = req.params.id;
+      
+      if(!id) return res.status(400) .json({status: 400,sucess: false, message: `TaskId is required`,});
 
-      const {taskId} = req.body;
-      console.log(taskId);
-
-      if(!taskId) return res.status(400) .json({status: 400,sucess: false, message: `TaskId is required`,});
-
-      const isTask = await AuditSchema.findOne({taskId});
+      const isTask = await AuditSchema.findOne({taskId:id});
 
       if(!isTask) return res.status(400) .json({status: 400,sucess: false, message: `TaskId Not Found`,});
 

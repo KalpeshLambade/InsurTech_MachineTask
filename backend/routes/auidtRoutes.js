@@ -7,7 +7,7 @@ const auidtRouter = express.Router();
 auidtRouter.post("/addTask",checkAddTask,addTask)
 auidtRouter.get("/getTask",getTask);
 auidtRouter.put("/updateTask",checkUpdateTask,updateTask);
-auidtRouter.delete("/delectTask",checkDelectTask,deletTask);
+auidtRouter.delete("/delectTask/:id",checkDelectTask,deletTask);
 
 auidtRouter.get("/getolddata",getBackup);
 
