@@ -14,7 +14,7 @@ const hospitalModel = new Schema({
         required:true
     }
 },
-{timeseries:true}
+{timestamps:true}
 )
 
 export default mongoose.model("HospitalModels",hospitalModel);
