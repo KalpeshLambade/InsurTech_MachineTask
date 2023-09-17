@@ -3,11 +3,10 @@ import HospitalModels from "../model/hospitalModel.js";
 export const addHospitals = async(req,res) => {
     try {
 
-        const {providerName,HOS} = req.body;
+        const {providerName,HOS,Address,Phone,Email,Web} = req.body;
 
         const newHospital = new HospitalModels({
-            providerName,
-            HOS,
+            providerName,HOS,Address,Phone,Email,Web,
         });
 
         await newHospital.save();

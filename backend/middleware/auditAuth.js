@@ -33,9 +33,9 @@ export const checkAddTask = async (req, res, next) => {
 
 
     const isHospital = await HospitalModels.findOne({HOS}).exec();
-
+   
     if(!isHospital) return res.status(400).json({ status: 400, sucess: false, message: `Hospital Not Found` });
-    if(!(HOS === isHospital.HOS && providerName === isHospital.providerName)) return res.status(400).json({ status: 400, sucess: false, message: `HOS ID and Hospital Name not matched` });
+    if(!(HOS === isHospital.HOS && providerName === isHospital.providerName + "" + isHospital.Address)) return res.status(400).json({ status: 400, sucess: false, message: `HOS ID and Hospital Name not matched` });
 
     next();
   } catch (error) {

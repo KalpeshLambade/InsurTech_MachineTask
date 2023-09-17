@@ -22,11 +22,13 @@ export function Main({ isDelete, isChanged, isUpdate ,isAdd}) {
     try {
       const response = await axios.get("http://localhost:4000/api/v1/getTask");
       if (response.data.sucess) {
-        console.log(response.data.allTask);
-        setTABLE_ROWS(response.data.allTask);
+        setTABLE_ROWS(response?.data?.allTask);
+      }
+      else{
+        alert(response?.data?.message);
       }
     } catch (error) {
-      console.log(error);
+      alert(!error?.response?.data?.message);
     }
   };
 

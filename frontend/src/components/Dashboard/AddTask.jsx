@@ -43,8 +43,11 @@ export const AddTask = ({ isAdd }) => {
           "http://localhost:4000/api/v1/gethospital"
         );
 
-        if (response.data.sucess) {
-            setHospitalData(response.data.hospitals)
+        if (response?.data?.sucess) {
+            setHospitalData(response?.data?.hospitals)
+        }
+        else{
+          alert(response?.data?.message);
         }
       } catch (error) {
         if(!error.response.data.sucess){
@@ -78,18 +81,18 @@ export const AddTask = ({ isAdd }) => {
             remark:addData.remark
         })
 
-        if(response.data.sucess){
-            alert(response.data.message);
+        if(response?.data?.sucess){
+            alert(response?.data?.message);
             isAdd();
         }
         else{
-            alert(response.data.message);
+            alert(response?.data?.message);
         }
 
 
     } catch (error) {
-        if(!error.response.data.sucess){
-            console.log(error.response.data.message)
+        if(!error?.response?.data?.sucess){
+            console.log(error?.response?.data?.message)
         }
     }
   }
@@ -122,7 +125,7 @@ export const AddTask = ({ isAdd }) => {
                 <Select label="Provider Name" onChange={(e) => handelChange(e,"providerName")}>
                     {hospitalData ?(
                         hospitalData.map((e,i)=>(
-                            <Option value={e.providerName} key={i}>{e.providerName}</Option>
+                            <Option value={e.providerName + "" + e.Address} key={i}>{e.providerName + "" + e.Address}</Option>
                         ))
                      ):(<Option value="No Data" disabled> No Data</Option>)}
 
