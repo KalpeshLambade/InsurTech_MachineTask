@@ -38,8 +38,8 @@ export const Delete = ({isDelete, taskId}) => {
 
   return (
     <>
-      <main className=" z-10 absolute w-full h-full flex justify-center items-center backdrop-blur-sm">
-        <section ref={divRef}  className="md:w-[50%] md:h-[30%] flex flex-col justify-between border border-gray-400 rounded-lg">
+      <main className=" z-10 absolute w-full h-full flex justify-center items-center backdrop-blur-md">
+        <section ref={divRef}  className="md:w-[50%] md:h-[30%] flex flex-col justify-between border border-gray-800 rounded-lg">
           <div className="flex justify-between mx-5 my-5 ">
             <p className="font-medium text-xl">Are you sure want to delete ?</p>
             <button onClick={isDelete}>

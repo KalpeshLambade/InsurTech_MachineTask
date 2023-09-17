@@ -72,15 +72,5 @@ export const deletTask = async(req,res) => {
     }
 }
 
-export const getBackup = async(req,res) => {
-    try {
 
-        const getData = await Backup.find().exec();
-
-        return res.status(200).json({status:200, sucess:true, getData});
-
-    } catch (error) {
-        return res.status(500) .json({status: 500,sucess: false, message: `Internal server error :${error}`,});
-    }
-}
 

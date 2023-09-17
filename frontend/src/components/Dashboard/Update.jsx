@@ -65,7 +65,7 @@ export const Update = ({ isUpated, task }) => {
   
   return (
     <>
-      <main className=" z-10 absolute w-full h-full flex justify-center items-center backdrop-blur-sm">
+      <main className=" z-10 absolute w-full h-full flex justify-center items-center backdrop-blur-lg">
         
         <section ref={divRef}>
           

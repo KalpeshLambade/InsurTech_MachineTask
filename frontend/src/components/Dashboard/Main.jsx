@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { IconButton } from "@material-tailwind/react";
 import axios from "axios";
 import { TrashIcon, PencilSquareIcon } from "@heroicons/react/24/outline";
+import { Button } from "@material-tailwind/react";
 
 const TABLE_HEAD = [
   "Task Id",
@@ -14,7 +15,7 @@ const TABLE_HEAD = [
   "Action",
 ];
 
-export function Main({ isDelete, isChanged, isUpdate }) {
+export function Main({ isDelete, isChanged, isUpdate ,isAdd}) {
   const [TABLE_ROWS, setTABLE_ROWS] = useState([]);
 
   const getAuditDetails = async () => {
@@ -34,10 +35,11 @@ export function Main({ isDelete, isChanged, isUpdate }) {
   }, [isChanged]);
 
   return (
-    <Card className="h-full overflow-scroll flex mt-2 ">
+    <>
+    <Card className="h-full w-[90%] overflow-scroll flex mt-2 ml-5">
       {TABLE_ROWS.length ? (
         <>
-          <table className="w-[98%] table-auto text-left mt-4 ml-3">
+          <table className="w-full table-auto text-left mt-4">
             <thead>
               <tr>
                 {TABLE_HEAD.map((head) => (
@@ -141,12 +143,32 @@ export function Main({ isDelete, isChanged, isUpdate }) {
               ))}
             </tbody>
           </table>
+
+          <Button
+        size="md"
+        variant="gradient"
+        color="light-blue"
+        className="flex items-center overflow-hidden justify-center my-12 self-center md:mr-10 ml-80 md:ml-0"
+        onClick={isAdd}
+      >
+        Create new Audit
+      </Button>
         </>
       ) : (
         <>
         <div className="text-center py-6"> No Audit Found</div>
+        <Button
+        size="md"
+        variant="gradient"
+        color="light-blue"
+        className="flex items-center overflow-hidden justify-center my-12 self-center md:mr-10 ml-80 md:ml-0"
+        onClick={isAdd}
+      >
+        Create new Audit
+      </Button>
         </>
       )}
     </Card>
+    </>
   );
 }
