@@ -4,7 +4,7 @@ import AuditSchema from "../model/auditModel.js";
 
 export const checkAddTask = async (req, res, next) => {
   try {
-    const {providerName,HOS, action, remark } = req.body;
+    const {providerName,HOS, action, remark, userId} = req.body;
 
     if (!providerName)
       return res
@@ -30,6 +30,10 @@ export const checkAddTask = async (req, res, next) => {
       return res
         .status(400)
         .json({ status: 400, sucess: false, message: `Remark is required` });
+    if (!userId)
+        return res
+          .status(400)
+          .json({ status: 400, sucess: false, message: `User is required` });
 
 
     const isHospital = await HospitalModels.findOne({HOS}).exec();

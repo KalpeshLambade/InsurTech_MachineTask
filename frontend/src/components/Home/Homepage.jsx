@@ -5,12 +5,14 @@ import Sidebar from "../sidebar/Siderbar";
 import { Delete } from "../Dashboard/Delete";
 import { Update } from "../Dashboard/Update";
 import { AddTask } from "../Dashboard/AddTask";
+import { Login } from "../UserData/Login";
 
 const Homepage = () => {
   const [browserWidth, setBrowserWidth] = useState();
 
   const [displayCont, setDisplayCont] = useState({delete:false, add:false, update:false});
   const [tempData, setTempData] = useState(null);
+  const [isUser, setIsUser] = useState(false);
 
   useEffect(() => {
     setBrowserWidth(window.innerWidth || document.documentElement.clientWidth);
@@ -26,7 +28,9 @@ const Homepage = () => {
         </div>
 
         <div className="lg:w-[84%] md:w-[72%] flex flex-col justify-center items-center ">
-          <HomeNavbar/>
+          <HomeNavbar isLog={()=> setIsUser((pre) => !pre)} />
+
+          
           <Main  isChanged ={displayCont}  
           isDelete={(e)=> {
             setDisplayCont({...displayCont, ["delete"]:true});
@@ -38,23 +42,24 @@ const Homepage = () => {
             setTempData(e);
           }
           }
-
           isAdd ={() =>{
             setDisplayCont({...displayCont, ["add"]:true});
             setTempData("");
           }
           }
-
           />
+
         </div>
           
       </main>
 
-      
-
       {displayCont?.delete && <Delete isDelete={()=> setDisplayCont({...displayCont, ["delete"]:false})} taskId={tempData}/>}
       {displayCont.update && <Update isUpated = {()=> setDisplayCont({...displayCont, ["update"]:false})} task={tempData} />}
       {displayCont?.add && <AddTask isAdd = {()=> setDisplayCont({...displayCont, ["add"]:false})} />}
+
+      {isUser && <Login isLog={()=> setIsUser((pre) => !pre)}/>}
+
+
     </>
   );
 };

@@ -8,6 +8,7 @@ import {
   MenuList,
   MenuItem,
   Avatar,
+  ListItem,
 } from "@material-tailwind/react";
 import {
   UserCircleIcon,
@@ -102,7 +103,7 @@ function ProfileMenu() {
   );
 }
 
-export function HomeNavbar() {
+export function HomeNavbar({isLog}) {
   return (
     <Navbar className="mx-auto p-2 lg:rounded-full lg:pl-6 mt-2 w-[90%]">
       <div className="relative mx-auto flex items-center justify-between text-blue-gray-900">
@@ -110,9 +111,18 @@ export function HomeNavbar() {
           className="mr-4 ml-2 cursor-pointer py-1.5 font-bold"
         >
           Dashboard
+
         </Typography>
 
-        <ProfileMenu />
+
+        <ListItem className="flex items-center md:w-[10%] w-[30%] self-end justify-evenly" onClick={isLog}>
+          <UserCircleIcon className="h-[18px] w-[18px]" />
+          Login
+        </ListItem>
+
+
+
+        {/* <ProfileMenu /> */}
       </div>
     </Navbar>
   );

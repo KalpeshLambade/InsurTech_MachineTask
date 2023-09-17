@@ -5,17 +5,15 @@ import { genTaskId } from "../utils/taskId.js";
 export const addTask = async(req,res) =>{
     try {
 
-        const {HOS,providerName,action,remark} = req.body;
+        const {HOS,providerName,action,remark,userId} = req.body;
  
-        // const maxTask = await AuditSchema.findOne({}).sort({ taskId: -1 });
-        // const newTaskId = maxTask ? maxTask.taskId + 1 : 1;
-
         const newTask = new AuditSchema({
             taskId : genTaskId(),
             HOS,
             providerName,
             action,
-            remark
+            remark,
+            userId
         });
 
         await newTask.save();
