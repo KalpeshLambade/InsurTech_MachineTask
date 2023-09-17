@@ -3,9 +3,7 @@ import morgan from "morgan";
 import cors from "cors";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
-import router from "./routes/userRoutes.js";
-import auidtRouter from "./routes/auidtRoutes.js";
-import hospitalRouter from "./routes/hospitalRoutes.js";
+import router from "./routes/routes.js";
 
 const app = express();
 
@@ -16,9 +14,9 @@ app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+//Routes
 app.use("/api/v1",router);
-app.use("/api/v1",auidtRouter);
-app.use("/api/v1",hospitalRouter);
+
 
 mongoose
   .connect(process.env.MONGODB_URL)

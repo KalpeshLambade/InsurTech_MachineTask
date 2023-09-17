@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { HomeNavbar } from "./HomeNav";
-import { Main } from "../Main";
+import { Main } from "../Dashboard/Main";
 import Sidebar from "../sidebar/Siderbar";
-import { Delete } from "../Delete";
-import { Update } from "../Update";
+import { Delete } from "../Dashboard/Delete";
+import { Update } from "../Dashboard/Update";
 
 const Homepage = () => {
   const [browserWidth, setBrowserWidth] = useState();
