@@ -1,9 +1,10 @@
 import { Card, Typography } from "@material-tailwind/react";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { IconButton } from "@material-tailwind/react";
 import axios from "axios";
 import { TrashIcon, PencilSquareIcon } from "@heroicons/react/24/outline";
 import { Button } from "@material-tailwind/react";
+import { AuthContext } from "../UserContext/AuthProvider";
 
 const TABLE_HEAD = [
   "Task Id",
@@ -16,6 +17,8 @@ const TABLE_HEAD = [
 ];
 
 export function Main({ isDelete, isChanged, isUpdate ,isAdd}) {
+  const {state} = useContext(AuthContext);
+
   const [TABLE_ROWS, setTABLE_ROWS] = useState([]);
 
   const getAuditDetails = async () => {
@@ -39,6 +42,10 @@ export function Main({ isDelete, isChanged, isUpdate ,isAdd}) {
   return (
     <>
     <Card className="h-full w-[90%] overflow-scroll flex mt-2 ml-5">
+
+    {state?.user  ?<>
+      
+      
       {TABLE_ROWS.length ? (
         <>
           <table className="w-full table-auto text-left mt-4">
@@ -170,6 +177,21 @@ export function Main({ isDelete, isChanged, isUpdate ,isAdd}) {
       </Button>
         </>
       )}
+    
+    
+    </>   : <>
+
+    <div className="text-center my-5">Login to Acess Dashboard</div>
+    
+    </>}
+
+
+
+
+
+
+
+
     </Card>
     </>
   );

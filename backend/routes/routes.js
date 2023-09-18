@@ -1,6 +1,6 @@
 import express from "express";
-import { checkLogin, checkRegister } from "../middleware/userAuth.js";
-import { login, register } from "../controller/user.cont.js";
+import { checkLogin, checkRegister, checkToken } from "../middleware/userAuth.js";
+import { login, register, verifyToken } from "../controller/user.cont.js";
 import { checkAddHospitals } from "../middleware/hospitalAuth.js";
 import { addHospitals, getHospitals } from "../controller/hospital.cont.js";
 import { checkAddTask, checkDelectTask, checkUpdateTask } from "../middleware/auditAuth.js";
@@ -11,6 +11,7 @@ const router = express.Router();
 //User Routes
 router.post("/register",checkRegister,register);
 router.post("/login",checkLogin,login);
+router.post("/verify",checkToken,verifyToken);
 
 //Hospital Routes
 router.post("/addhospital",checkAddHospitals,addHospitals);

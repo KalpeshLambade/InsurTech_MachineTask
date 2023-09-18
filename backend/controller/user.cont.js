@@ -54,3 +54,28 @@ export const login = async(req,res) => {
     return res.status(500) .json({status: 500,sucess: false, message: `Internal server error :${error}`,});
   }
 }
+
+export const verifyToken = async(req,res) => {
+  try {
+
+    const {token} = req.body;
+
+    const decToken = jwt.verify(token, process.env.SECRET);
+
+    if(!decToken) return res.status(400).json({status:400,sucess:false, message:`Invalid Token`});
+
+    const userId = decToken.id;
+
+    const getUserData = await Users.findById(userId).select("-password").exec();
+    
+    if(!getUserData) return res.status(400).json({status:400,sucess:false, message:`No User found`});
+
+    const userData = {id:getUserData._id, email:getUserData.email, username:getUserData.username,role:getUserData.role};
+
+    return res.status(200).json({status:200, sucess:true, message:`Login sucessful!`, userData})
+
+ 
+  } catch (error) {
+    return res.status(500).json({status: 500,sucess: false,message: `Internal server error :${error}`,});
+  }
+}

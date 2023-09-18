@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import axios from "axios";
 import {
   Card,
@@ -9,8 +9,11 @@ import {
   Select,
   Option,
 } from "@material-tailwind/react";
+import { AuthContext } from "../UserContext/AuthProvider";
 
 export const AddTask = ({ isAdd }) => {
+  const {state} = useContext(AuthContext);
+
   const divRef = useRef(null);
   const [isInitialLoad, setIsInitialLoad] = useState(true);
   const [isCheck, setIscheck] = useState(false);
@@ -18,6 +21,7 @@ export const AddTask = ({ isAdd }) => {
   const [addData,setAddData] =useState({HOS:"", providerName:"", action:"", remark:""});
 
   const handelCLickOutside = (event) => {
+
     if (
       !isInitialLoad &&
       divRef.current &&
@@ -78,7 +82,8 @@ export const AddTask = ({ isAdd }) => {
             HOS:addData.HOS,
             providerName:addData.providerName,
             action:addData.action,
-            remark:addData.remark
+            remark:addData.remark,
+            userId:state?.user?.id
         })
 
         if(response?.data?.sucess){

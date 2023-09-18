@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import {
   Card,
   CardHeader,
@@ -11,8 +11,12 @@ import {
 } from "@material-tailwind/react";
 import { HomeIcon } from "@heroicons/react/24/outline";
 import axios from "axios";
+import { AuthContext } from "../UserContext/AuthProvider";
 
 export const Login = ({ isLog }) => {
+
+  const {login} = useContext(AuthContext);
+
   const [isuserLogin, setIsUserLogin] = useState(true);
   const [isCheck, setIscheck] = useState(false);
 
@@ -48,7 +52,8 @@ export const Login = ({ isLog }) => {
         })
 
         if(response.data.sucess){
-          console.log(response.data);
+          // console.log(response.data);
+          login(response.data);
           isLog();
         }
         else{

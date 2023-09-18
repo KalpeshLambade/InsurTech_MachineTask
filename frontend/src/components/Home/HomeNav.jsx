@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   Navbar,
   Typography,
@@ -18,6 +18,7 @@ import {
   LifebuoyIcon,
   PowerIcon,
 } from "@heroicons/react/24/outline";
+import { AuthContext } from "../UserContext/AuthProvider";
 
 const profileMenuItems = [
   {
@@ -42,10 +43,20 @@ const profileMenuItems = [
   },
 ];
 
-function ProfileMenu() {
+function ProfileMenu({name,logout}) {
+
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
-  const closeMenu = () => setIsMenuOpen(false);
+  const closeMenu = (key) => {
+
+    if(key === 4 ){
+      logout();
+    }
+    else{
+      setIsMenuOpen(false)
+    }
+
+  };
 
   return (
     <Menu open={isMenuOpen} handler={setIsMenuOpen} placement="bottom-end">
@@ -76,7 +87,7 @@ function ProfileMenu() {
           return (
             <MenuItem
               key={label}
-              onClick={closeMenu}
+              onClick={() => closeMenu(key)}
               className={`flex items-center gap-2 rounded ${
                 isLastItem
                   ? "hover:bg-red-500/10 focus:bg-red-500/10 active:bg-red-500/10"
@@ -93,7 +104,8 @@ function ProfileMenu() {
                 className="font-normal"
                 color={isLastItem ? "red" : "inherit"}
               >
-                {label}
+                {key === 0 ? name : label}
+
               </Typography>
             </MenuItem>
           );
@@ -103,26 +115,28 @@ function ProfileMenu() {
   );
 }
 
-export function HomeNavbar({isLog}) {
+export function HomeNavbar({ isLog }) {
+  const {state,logout} = useContext(AuthContext);
+
   return (
     <Navbar className="mx-auto p-2 lg:rounded-full lg:pl-6 mt-2 w-[90%]">
       <div className="relative mx-auto flex items-center justify-between text-blue-gray-900">
-        <Typography
-          className="mr-4 ml-2 cursor-pointer py-1.5 font-bold"
-        >
+        <Typography className="mr-4 ml-2 cursor-pointer py-1.5 font-bold">
           Dashboard
-
         </Typography>
 
+        {state?.user ? (
+          <ProfileMenu  name ={state?.user?.username} logout={logout}/>
+        ) : (
+          <ListItem 
+            className="flex items-center md:w-[10%] w-[30%] self-end justify-evenly"
+            onClick={isLog}
+          >
+            <UserCircleIcon className="h-[18px] w-[18px]" />
+            Login
+          </ListItem>
+        )}
 
-        <ListItem className="flex items-center md:w-[10%] w-[30%] self-end justify-evenly" onClick={isLog}>
-          <UserCircleIcon className="h-[18px] w-[18px]" />
-          Login
-        </ListItem>
-
-
-
-        {/* <ProfileMenu /> */}
       </div>
     </Navbar>
   );

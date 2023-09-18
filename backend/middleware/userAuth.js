@@ -85,3 +85,18 @@ export const checkLogin = async (req, res, next) => {
       });
   }
 };
+
+export const checkToken =async(req,res,next) => {
+
+    try {
+      const {token} = req.body;
+
+      if(!token) return res.status(400).json({status:400,sucess:false, message:`Token not found`});
+
+      next();
+      
+    } catch (error) {
+      return res.status(500).json({status: 500,sucess: false,message: `Internal server error :${error}`,});
+    }
+
+}

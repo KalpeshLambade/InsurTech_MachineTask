@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { HomeNavbar } from "./HomeNav";
 import { Main } from "../Dashboard/Main";
 import Sidebar from "../sidebar/Siderbar";
@@ -30,7 +30,6 @@ const Homepage = () => {
         <div className="lg:w-[84%] md:w-[72%] flex flex-col justify-center items-center ">
           <HomeNavbar isLog={()=> setIsUser((pre) => !pre)} />
 
-          
           <Main  isChanged ={displayCont}  
           isDelete={(e)=> {
             setDisplayCont({...displayCont, ["delete"]:true});
